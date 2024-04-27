@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/model/todo.dart';
-// Widget representing a single ToDo item in the list
-class ToDoItem extends StatelessWidget {
-  final ToDo todo; // The ToDo object associated with this item
-  final Function(ToDo) onToDoChanged; // Callback function for task completion status change
-  final Function(String) onDeleteItem; // Callback function for task deletion
 
-  // Constructor for ToDoItem, taking required parameters
+class ToDoItem extends StatelessWidget {
+  final ToDo todo;
+  final Function(ToDo) onToDoChanged;
+  final Function(String) onDeleteItem;
+
   const ToDoItem({
     Key? key,
     required this.todo,
@@ -17,28 +16,30 @@ class ToDoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20),  // Set margin for the ListTile container
+      margin: EdgeInsets.only(bottom: 20),
       child: ListTile(
         onTap: () {
-          onToDoChanged(todo);  // Invoke callback function when the item is tapped
+          onToDoChanged(todo);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(20),  // Set rounded corners for the ListTile
+            Radius.circular(20),
           ),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),  // Set content padding
-        tileColor: Colors.white,  // Set background color of the ListTile
+        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        tileColor: Colors.grey[200],
         leading: Icon(
-          todo.isDone ? Icons.check_box : Icons.check_box_outline_blank,  // Display check box icon based on completion status
-          color: Colors.blue,  // Set icon color to blue
+          todo.isDone ? Icons.done : Icons.done_outline,
+          color: Colors.green,
         ),
         title: Text(
-          todo.todoText,  // Display the task text
+          todo.todoText,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.brown,
-            decoration: todo.isDone ? TextDecoration.lineThrough : null,  // Apply strikethrough decoration if task is completed
+            color: Colors.black87,
+            decoration: todo.isDone ? TextDecoration.lineThrough : null,
+            decorationColor: Colors.green,
+            decorationThickness: 2.0,
           ),
         ),
         trailing: Container(
@@ -47,17 +48,17 @@ class ToDoItem extends StatelessWidget {
           height: 35,
           width: 35,
           decoration: BoxDecoration(
-            color: Colors.red,  // Set background color of the delete button container to red
-            borderRadius: BorderRadius.circular(5),  // Set rounded corners for the delete button container
+            color: Colors.red[300],
+            borderRadius: BorderRadius.circular(5),
           ),
           child: IconButton(
             onPressed: () {
-              onDeleteItem(todo.id);  // Invoke callback function when delete button is pressed, passing task ID
+              onDeleteItem(todo.id);
             },
             icon: Icon(
-              Icons.delete,
+              Icons.delete_outline,
               size: 18,
-              color: Colors.green,  // Set icon color to white
+              color: Colors.white,
             ),
           ),
         ),
